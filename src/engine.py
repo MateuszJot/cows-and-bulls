@@ -16,6 +16,8 @@ class stats(object):
         self.word = word
 
 class engine(object):
+    EXIT_PROGRAM = "4"
+
     scene_manager = None
     dictionary = None
     validator = None
@@ -37,6 +39,14 @@ class engine(object):
     def start_engine(self):
         self.update()
 
+    def update(self):
+        self.scene_manager.draw("")
+        argument = input()
+        while argument != self.EXIT_PROGRAM:
+            self.scene_manager.draw(argument)
+            argument = input()
+
+    ### GAMEPLAY ###
     def start_game(self):
         self.is_playing = True
         self.chosen_word = self.dictionary.get_random_word(self.difficulty)
@@ -46,7 +56,7 @@ class engine(object):
         self.is_playing = False
         self.chosen_word = ""
         self.stats = [stats(0, 0, "-")]
-
+ 
     def save_stats(self):
         absolute_path = os.path.dirname(__file__)
         absolute_path = os.path.join(absolute_path, "../data/stats.txt")
@@ -82,6 +92,7 @@ class engine(object):
         if len(self.stats) >= self.tries_amount:
             self.scene_manager.set_scene(self.scene_manager.END_SCENE)
 
+    ### SETTINGS ###
     def change_difficulty(self):
         if self.is_playing:
             logger.log("Can't change settings ingame!", logger.WARNING)
@@ -99,10 +110,3 @@ class engine(object):
         self.tries_amount = self.tries_amount + 10
         if self.tries_amount > 100:
             self.tries_amount = 10
-
-    def update(self):
-        self.scene_manager.draw("")
-        argument = input()
-        while argument != "4":
-            self.scene_manager.draw(argument)
-            argument = input()

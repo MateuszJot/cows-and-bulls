@@ -1,7 +1,8 @@
 ---STATS---
-WORD: train
-TRIES: 3
+WORD: games
+TRIES: 4
 ---HISTORY---
-1) WORD: tpppp | BULLS: 1 COWS: 0
-2) WORD: ptppp | BULLS: 0 COWS: 1
-3) WORD: train | BULLS: 5 COWS: 0
+1) WORD: gamew | BULLS: 4 COWS: 0
+2) WORD: semag | BULLS: 1 COWS: 4
+3) WORD: pppppp | BULLS: 0 COWS: 0
+4) WORD: games | BULLS: 5 COWS: 0

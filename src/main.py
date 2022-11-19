@@ -1,4 +1,4 @@
-import engine
+from engine import engine
 
 if __name__ == "__main__":
-    engine = engine.engine()
+    game_engine = engine()

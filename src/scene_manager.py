@@ -36,14 +36,15 @@ class scene_manager(object):
     def __init__(self, engine):
         self.engine = engine
 
+    ### DRAW LOGIC ###
+    def refresh(self):
+        self.draw("")
+
     def set_scene(self, scene: int):
         self.current_scene = scene
         if self.current_scene == self.MENU_SCENE:
             self.engine.stop_game()
-        self.draw("")
-
-    def refresh(self):
-        self.draw("")
+        self.refresh()
 
     def draw(self, argument):
         print(self.CLEAR)
@@ -58,38 +59,7 @@ class scene_manager(object):
         elif self.current_scene == self.END_SCENE:
             self.draw_end_scene(argument)
 
-    def draw_game_scene(self, argument):
-        print(f"DEBUG [should not be visible] {self.engine.chosen_word}")
-        print(f"Chosed word has {len(self.engine.chosen_word)} letters")
-        print(f"Bulls {self.engine.stats[-1].bulls} | Cows: {self.engine.stats[-1].cows}")
-        print(f"Tries left: {self.engine.tries_amount - len(self.engine.stats) + 1}")
-        print("\n\n")
-        print("==============================")
-        print("1 - Exit to the menu")
-        if argument == self.GAME_TO_MENU:
-            self.set_scene(self.MENU_SCENE)
-        else:
-            self.engine.validate_word(argument)
-            if argument != "":
-                self.refresh()
-
-    def draw_end_scene(self, argument):
-        if self.engine.stats[-1].bulls == len(self.engine.chosen_word):
-            print("You won!")
-            print(f"You made it with {len(self.engine.stats)} tries")
-        else:
-            print("You lost ;c")
-
-        print(f"The chosen word was: {self.engine.chosen_word}")
-        print("\n\n")
-        print("==============================")
-        print("1 - Exit to the menu")
-        print("2 - Save highscore")
-        if argument == self.END_TO_MENU:
-            self.set_scene(self.MENU_SCENE)
-        if argument == self.END_SAVE_SCORE:
-            self.engine.save_stats()
-
+    ### SCENES ###
     def draw_menu_scene(self, argument):
         print("============|MENU|============")
         print("1 - New Game")
@@ -145,3 +115,35 @@ class scene_manager(object):
             self.refresh()
         elif argument == self.SETTINGS_TO_MENU:
             self.set_scene(self.MENU_SCENE)
+
+    def draw_game_scene(self, argument):
+        print(f"DEBUG [should not be visible] {self.engine.chosen_word}")
+        print(f"Chosed word has {len(self.engine.chosen_word)} letters")
+        print(f"Bulls {self.engine.stats[-1].bulls} | Cows: {self.engine.stats[-1].cows}")
+        print(f"Tries left: {self.engine.tries_amount - len(self.engine.stats) + 1}")
+        print("\n\n")
+        print("==============================")
+        print("1 - Exit to the menu")
+        if argument == self.GAME_TO_MENU:
+            self.set_scene(self.MENU_SCENE)
+        else:
+            self.engine.validate_word(argument)
+            if argument != "":
+                self.refresh()
+
+    def draw_end_scene(self, argument):
+        if self.engine.stats[-1].bulls == len(self.engine.chosen_word):
+            print("You won!")
+            print(f"You made it with {len(self.engine.stats)} tries")
+        else:
+            print("You lost ;c")
+
+        print(f"The chosen word was: {self.engine.chosen_word}")
+        print("\n\n")
+        print("==============================")
+        print("1 - Exit to the menu")
+        print("2 - Save highscore")
+        if argument == self.END_TO_MENU:
+            self.set_scene(self.MENU_SCENE)
+        if argument == self.END_SAVE_SCORE:
+            self.engine.save_stats()
