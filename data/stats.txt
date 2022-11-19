@@ -1,0 +1,7 @@
+---STATS---
+WORD: train
+TRIES: 3
+---HISTORY---
+1) WORD: tpppp | BULLS: 1 COWS: 0
+2) WORD: ptppp | BULLS: 0 COWS: 1
+3) WORD: train | BULLS: 5 COWS: 0
