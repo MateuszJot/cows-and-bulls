@@ -1,6 +1,9 @@
 # Cows & Bulls
 An university assignment
 
+# Unit tests result
+![alt text]([http://url/to/img.png](https://github.com/MateuszJot/cows-and-bulls/blob/main/validator_results.png))
+
 # Rules (took from the Wikipedia)
 One player (the Host) thinks of an isogram word (i.e. no letter appears twice) and, if the word length is not pre-determined, announces the number of letters in the word.  
 Other players (the Guessers) try to figure out that word by guessing isogram words containing the same number of letters.  
