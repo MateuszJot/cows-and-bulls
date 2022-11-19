@@ -1,12 +1,11 @@
 import unittest
-import validator as v
-import dictionary as d
-import misc.difficulty as difficulty
+from validator import validator
+from dictionary import dictionary
+from misc.difficulty import difficulty
 
-do_tests = True
 class unit_tests(unittest.TestCase):
-    validator = v.validator()
-    dictionary = d.dictionary("../data/dictionary.txt")
+    validator = validator()
+    dictionary = dictionary("../data/dictionary.txt")
 
     #Verification of the validator operations (basic and edge-cases)
     def test_validator_1(self):

@@ -1,9 +1,9 @@
 import os
-import scene_manager
-import dictionary as dic
-import misc.difficulty as difficulty
-import misc.logger as logger
-import validator as v
+from scene_manager import scene_manager
+from dictionary import dictionary
+from misc.difficulty import difficulty
+from misc.logger import logger
+from validator import validator
 
 class stats(object):
     bulls = 0
@@ -16,17 +16,25 @@ class stats(object):
         self.word = word
 
 class engine(object):
-    dictionary = dic.dictionary("../data/dictionary.txt")
-    validator = v.validator()
-    difficulty = difficulty.NORMAL
-    tries_amount = 10
+    scene_manager = None
+    dictionary = None
+    validator = None
+    difficulty = None
+    tries_amount = None
 
     is_playing = False
     chosen_word = None
     stats = []
     
     def __init__(self):
-        scene_manager.engine = self
+        self.dictionary = dictionary("../data/dictionary.txt")
+        self.scene_manager = scene_manager(self)
+        self.validator = validator()
+        self.difficulty = difficulty.NORMAL
+        self.tries_amount = 10
+        self.start_engine()
+
+    def start_engine(self):
         self.update()
 
     def start_game(self):
@@ -70,9 +78,9 @@ class engine(object):
         self.stats.append(stats(current_stats[1], current_stats[0], word))
 
         if current_stats[1] == len(self.chosen_word):
-            scene_manager.set_scene(scene_manager.END_SCENE)
+            self.scene_manager.set_scene(self.scene_manager.END_SCENE)
         if len(self.stats) >= self.tries_amount:
-            scene_manager.set_scene(scene_manager.END_SCENE)
+            self.scene_manager.set_scene(self.scene_manager.END_SCENE)
 
     def change_difficulty(self):
         if self.is_playing:
@@ -93,8 +101,8 @@ class engine(object):
             self.tries_amount = 10
 
     def update(self):
-        scene_manager.draw("")
+        self.scene_manager.draw("")
         argument = input()
         while argument != "4":
-            scene_manager.draw(argument)
+            self.scene_manager.draw(argument)
             argument = input()

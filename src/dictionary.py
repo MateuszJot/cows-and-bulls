@@ -1,7 +1,7 @@
 import os
 import random
-import misc.difficulty as difficulty
-import misc.logger as logger
+from misc.difficulty import difficulty
+from misc.logger import logger
 
 class dictionary(object):
     # Less or equal to 4

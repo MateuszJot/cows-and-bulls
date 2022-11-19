@@ -1,2 +1,4 @@
 import engine
-engine = engine.engine()
+
+if __name__ == "__main__":
+    engine = engine.engine()
